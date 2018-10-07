@@ -1,7 +1,7 @@
 export default class GameImage extends Image {
 	constructor(id, path) {
-		this.image = new Image();
-		this.image.src = path;
+		super();
+		this.src = path;
 		this.id = id;
 	}
 }

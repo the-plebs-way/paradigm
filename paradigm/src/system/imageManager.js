@@ -7,12 +7,12 @@ export default class ImageManager {
 
 	//Only accepts GameImages
 	add(image) {
-		if(typeof image === GameImage) {
-			images[image.id] = image;
+		if(image instanceof GameImage) {
+			this.images[image.id] = image;
 		} else console.log("Tried to add something to Image Manager that was not a GameImage");
 	}
 
 	get(id) {
-		return images[id];
+		return this.images[id];
 	}
 } 

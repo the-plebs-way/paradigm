@@ -11,18 +11,19 @@ export default class Game {
 		this.config = config;
 		this.scene = new config.bootScene(this);
 		this.imageManager = new ImageManager();
-		this.renderer = new Renderer(config);
+		this.renderer = new Renderer(config, this);
 		this.input = new Input();
 		this.init();
 	}
 
 	init() {
 		this.renderer.init();
+		this.scene.create();
 		this.run();
 	}
 
 	handleEvents(delta) {
-		
+		this.scene._handleEvents(delta);
 	}
 
 	update(delta) {
@@ -48,14 +49,13 @@ export default class Game {
 			this.handleEvents(delta);
 			this.update(delta);
 			this.render(delta);
+		}
+		this.lastCycle = Date.now();
 
-			this.lastCycle = Date.now();
-
-			window.requestAnimationFrame(function() {
-				//Wouldn't play nicely with all browsers unless I did it like this
-				game.run();
-			});
-		} else this.lastCycle = Date.now();
+		window.requestAnimationFrame(function() {
+			//Wouldn't play nicely with all browsers unless I did it like this
+			game.run();
+		});
 	}
 
 }

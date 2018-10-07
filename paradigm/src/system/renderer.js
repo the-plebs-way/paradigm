@@ -15,9 +15,9 @@ export default class Renderer {
 	render(delta, scene) {
 		this.context.fillStyle = "red";
 		this.context.fillRect(0, 0, this.config.width, this.config.height);
-
 		for(let key of Object.keys(scene.gameObjects)) {
-			scene.gameObjects[key].draw(game.imageManager, this.context);
+			console.log("looping");
+			scene.gameObjects[key].draw(this.game.imageManager, this.context);
 		}
 	}
 }
