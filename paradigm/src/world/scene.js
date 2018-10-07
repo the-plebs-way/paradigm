@@ -1,5 +1,5 @@
-import Sprite from "./gameObjects/sprite";
-import GameImage from "./gameObjects/gameImage";
+import Sprite from "./gameObjects/sprite.js";
+import GameImage from "./gameObjects/gameImage.js";
 
 export default class Scene {
 	constructor(game) {

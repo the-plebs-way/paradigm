@@ -5,8 +5,11 @@ import Input from "./input.js";
 export default class Game {
 	constructor(config = {}) {
 		this.lastCycle = 0;
+		this.fps = 60;
+		this.cycles = 0;
+		this.cycleTimer = 0;
 		this.config = config;
-		this.scenes = config.scenes;
+		this.scene = new config.bootScene(this);
 		this.imageManager = new ImageManager();
 		this.renderer = new Renderer(config);
 		this.input = new Input();
@@ -14,7 +17,6 @@ export default class Game {
 	}
 
 	init() {
-		this.scene = this.scenes[0];
 		this.renderer.init();
 		this.run();
 	}
@@ -32,16 +34,28 @@ export default class Game {
 	}
 
 	run() {
+		var game = this; //need to get self for the callback below
 		let now = Date.now();
 		let delta = now - this.lastCycle;
+		this.cycleTimer += delta;
+		if(this.cycleTimer >= 1000) {
+			this.cycles = 0;
+			this.cycleTimer = 0;
+		}
+		if(this.cycles < this.fps) {
+			this.cycles += 1;
+			
+			this.handleEvents(delta);
+			this.update(delta);
+			this.render(delta);
 
-		this.handleEvents(delta);
-		this.update(delta);
-		this.render(delta);
+			this.lastCycle = Date.now();
 
-		this.lastCycle = Date.now();
-
-		window.requestAnimationFrame(this.run);
+			window.requestAnimationFrame(function() {
+				//Wouldn't play nicely with all browsers unless I did it like this
+				game.run();
+			});
+		} else this.lastCycle = Date.now();
 	}
 
 }
