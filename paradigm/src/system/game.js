@@ -72,7 +72,7 @@ export default class Game {
 		for(var i = 0; i < this.fpsArray.length; i++) {
 			total += this.fpsArray[i];
 		}
-		return total / 100;
+		return total / this.fpsArray.length;
 	}
 
 }
