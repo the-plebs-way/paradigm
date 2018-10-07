@@ -1,9 +1,11 @@
 import Renderer from "./renderer.js";
+import ImageManager from "./imageManager.js";
 
 export default class Game {
 	constructor(config = {}) {
 		this.lastCycle = 0;
 		this.config = config;
+		this.imageManager = new ImageManager();
 		this.renderer = new Renderer(config);
 		this.init();
 	}
