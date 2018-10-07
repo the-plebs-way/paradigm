@@ -1,3 +1,5 @@
+"use strict";
+
 import Sprite from "./gameObjects/sprite.js";
 import GameImage from "./gameObjects/gameImage.js";
 
@@ -11,14 +13,15 @@ export default class Scene {
 	add(gameobject) {
 		if(gameobject instanceof Sprite) {
 			this.gameObjects[gameobject.id] = gameobject;
-			console.log("Added sprite");
+			return this.gameObjects[gameobject.id];
 		}
 		else if(gameobject instanceof GameImage) {
 			this.game.imageManager.add(gameobject);
-			console.log("Added game image");
+			return this.game.imageManager.get(gameobject.id);
 		}
 		else {
 			console.log("Tried to add unsupported type to scene with id " + gameobject.id);
+			return null;
 		}
 	}
 

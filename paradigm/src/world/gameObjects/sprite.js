@@ -7,6 +7,6 @@ export default class Sprite {
 	}
 
 	draw(imageManager, context) {
-		context.drawImage(imageManager.get(this.id), this.x, this.y);
+		context.drawImage(imageManager.get(this.id).image, this.x, this.y);
 	}
 }
