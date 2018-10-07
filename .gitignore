@@ -1,3 +1,7 @@
+#test assets and scripts for engine
+testAssets
+testScripts
+
 # Logs
 logs
 *.log

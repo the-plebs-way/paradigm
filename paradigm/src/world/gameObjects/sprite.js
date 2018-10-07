@@ -1,11 +1,12 @@
 export default class Sprite {
-	constructor(x, y, imgId) {
-		this.x = x;
-		this.y = y;
+	constructor(id, imgId) {
+		this.id = id;
+		this.x = 0;
+		this.y = 0;
 		this.id = imgId;
 	}
 
-	Draw(imageManager, context) {
+	draw(imageManager, context) {
 		context.drawImage(imageManager.GetImage(this.id), this.x, this.y);
 	}
 }

@@ -1,16 +1,20 @@
 import Renderer from "./renderer.js";
 import ImageManager from "./imageManager.js";
+import Input from "./input.js";
 
 export default class Game {
 	constructor(config = {}) {
 		this.lastCycle = 0;
 		this.config = config;
+		this.scenes = config.scenes;
 		this.imageManager = new ImageManager();
 		this.renderer = new Renderer(config);
+		this.input = new Input();
 		this.init();
 	}
 
 	init() {
+		this.scene = this.scenes[0];
 		this.renderer.init();
 		this.run();
 	}
@@ -20,11 +24,11 @@ export default class Game {
 	}
 
 	update(delta) {
-
+		this.scene.update(delta);
 	}
 
 	render(delta) {
-		this.renderer.render();
+		this.renderer.render(delta, this.scene);
 	}
 
 	run() {

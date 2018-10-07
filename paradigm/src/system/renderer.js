@@ -1,5 +1,6 @@
 export default class Renderer {
-	constructor(config = {}) {
+	constructor(config = {}, game) {
+		this.game = game;
 		this.config = config;
 	}
 
@@ -11,8 +12,12 @@ export default class Renderer {
 		document.body.appendChild(this.canvas);
 	}
 
-	render(delta) {
+	render(delta, scene) {
 		this.context.fillStyle = "red";
 		this.context.fillRect(0, 0, this.config.width, this.config.height);
+
+		for(let key of Object.keys(scene.gameObjects)) {
+			scene.gameObjects[key].draw(game.imageManager, this.context);
+		}
 	}
 }

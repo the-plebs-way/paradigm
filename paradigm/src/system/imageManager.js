@@ -1,13 +1,18 @@
+import GameImage from "../world/gameObjects/gameImage.js";
+
 export default class ImageManager {
 	constructor() {
 		this.images = {};
 	}
 
-	AddImage(id, image) {
-		images[id] = image;
+	//Only accepts GameImages
+	add(image) {
+		if(typeof image === GameImage) {
+			images[image.id] = image;
+		} else console.log("Tried to add something to Image Manager that was not a GameImage");
 	}
 
-	GetImage(id) {
+	get(id) {
 		return images[id];
 	}
 } 
